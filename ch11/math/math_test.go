@@ -2,11 +2,27 @@ package math
 
 import "testing"
 
-func TestAverage(t *testing.T) {
-	var v float64
-	v = Average([]float64{1, 2})
+type testpair struct {
+	values  []float64
+	average float64
+}
 
-	if v != 1.5 {
-		t.Error("Expected 1.5, got ", v)
+var tests = []testpair{
+	{[]float64{1, 2}, 1.5},
+	{[]float64{1, 1, 1, 1, 1, 1}, 1},
+	{[]float64{-1, 1}, 0},
+}
+
+func TestAverage(t *testing.T) {
+	for _, pair := range tests {
+		v := Average(pair.values)
+
+		if v != pair.average {
+			t.Error(
+				"For", pair.values,
+				"expect", pair.average,
+				"got", v,
+			)
+		}
 	}
 }
