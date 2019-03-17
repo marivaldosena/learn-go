@@ -3,7 +3,9 @@ package main
 import (
 	"encoding/gob"
 	"fmt"
+	"io"
 	"net"
+	"net/http"
 )
 
 func server() {
@@ -59,10 +61,34 @@ func client() {
 	c.Close()
 }
 
+func hello(res http.ResponseWriter, req *http.Request) {
+	res.Header().Set(
+		"Content-Type",
+		"text/html",
+	)
+
+	io.WriteString(
+		res,
+		`<doctype html>
+		<html>
+			<head>
+				<title>Hello World</title>
+			</head>
+			<body>
+				<h1>Hello World!</h1>
+			</body>
+		</html>`,
+	)
+}
+
 func main() {
 	go server()
 	go client()
 
 	var input string
 	fmt.Scanln(&input)
+
+	http.HandleFunc("/", hello)
+	fmt.Println("Running server on http://localhost:9000")
+	http.ListenAndServe(":9000", nil)
 }
