@@ -37,7 +37,7 @@ func usingContainerList() {
 	}
 }
 
-func orderList(people []Person) {
+func orderListByName(people []Person) {
 	sort.Sort(ByName(people))
 }
 
