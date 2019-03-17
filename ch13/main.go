@@ -2,7 +2,10 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"log"
 	"os"
+	"path"
 )
 
 func openFile(arquivo string) {
@@ -30,6 +33,25 @@ func openFile(arquivo string) {
 	fmt.Println(str)
 }
 
+func openFileWithIOUtil(arquivo string) {
+	bs, err := ioutil.ReadFile(arquivo)
+
+	if err != nil {
+		return
+	}
+
+	str := string(bs)
+	fmt.Println(str)
+}
+
 func main() {
-	openFile("arquivo.txt")
+	caminho, err := os.Getwd()
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	arquivo := path.Join(caminho, "arquivo.txt")
+	openFile(arquivo)
+	openFileWithIOUtil(arquivo)
 }
