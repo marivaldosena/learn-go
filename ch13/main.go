@@ -98,7 +98,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	arquivo := path.Join(caminho, "arquivo.txt")
+	arquivo := path.Join(caminho, "ch13", "arquivo.txt")
 	createFile(arquivo)
 	openFile(arquivo)
 	openFileWithIOUtil(arquivo)
