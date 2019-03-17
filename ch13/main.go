@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -83,6 +84,11 @@ func readCurrentDirectoryRecursively() {
 		fmt.Println(path)
 		return nil
 	})
+}
+
+func testWithError() {
+	err := errors.New("error message")
+	fmt.Println(err)
 }
 
 func main() {
