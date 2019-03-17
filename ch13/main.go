@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"path/filepath"
 )
 
 func openFile(arquivo string) {
@@ -74,6 +75,14 @@ func readCurrentDirectory() {
 	for _, fi := range fileInfos {
 		fmt.Println(fi.Name())
 	}
+}
+
+func readCurrentDirectoryRecursively() {
+	fmt.Println("Current Directory and Subfolders")
+	filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
+		fmt.Println(path)
+		return nil
+	})
 }
 
 func main() {
