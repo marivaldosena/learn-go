@@ -44,6 +44,18 @@ func openFileWithIOUtil(arquivo string) {
 	fmt.Println(str)
 }
 
+func createFile(arquivo string) {
+	file, err := os.Create(arquivo)
+
+	if err != nil {
+		return
+	}
+
+	defer file.Close()
+
+	file.WriteString("test from file.")
+}
+
 func main() {
 	caminho, err := os.Getwd()
 
@@ -52,6 +64,7 @@ func main() {
 	}
 
 	arquivo := path.Join(caminho, "arquivo.txt")
+	createFile(arquivo)
 	openFile(arquivo)
 	openFileWithIOUtil(arquivo)
 }
