@@ -89,6 +89,13 @@ func main() {
 	fmt.Scanln(&input)
 
 	http.HandleFunc("/", hello)
+	http.Handle(
+		"/assets/",
+		http.StripPrefix(
+			"/assets/",
+			http.FileServer(http.Dir("assets")),
+		),
+	)
 	fmt.Println("Running server on http://localhost:9000")
 	http.ListenAndServe(":9000", nil)
 }
